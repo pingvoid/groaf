@@ -1,3 +1,9 @@
+/**
+* Groaf - Colloborativ 3D-WebGL Editor
+* author: Hendrik Wernze
+* mail: hwernze@gmail.com
+**/
+
 ///////////////////////////////
 // Config
 ///////////////////////////////
