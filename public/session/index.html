@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8" />
+    <title>GROAF</title>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" href="./styles/style.css">     
+</head>
+
+<body>
+	<div class="container">
+			<!-- Menu -->
+				<nav class="menubar">
+					<div class="logo">groaf</div>
+					<ul>
+						<li>
+							<a href="#" class="menu-item" tabindex="0">Edit</a>
+							<div class="menu-content">
+								<div class="menu-sub">
+									<ul>
+										<li><a href="#" class='interaction'>Delete</a></li>
+										<li id="test">											
+											<a href="#" id='loadObjBtn' onClick=>Import Object</a>
+											<input class="displayNone" type="file" id="fileload" name="upload" size="50" maxlength="100000"accept="model/obj" />
+										</li>
+									</ul>
+								</div>
+							</div>
+
+						</li>
+
+						<li>
+							<a href="#" class="menu-item" tabindex="1">Create</a>
+							<div class="menu-content">
+								<div class="menu-sub">
+									<ul>
+										<label>Primitves</label>
+										<li><a href="#" class='interaction' id='addcubeBtn'>Box</a></li>
+										<li><a href="#" class='interaction' id="addcylinder">Cylinder</a></li>
+										<li><a href="#" class='interaction' id="addtorus">Torus</a></li>
+									</ul>
+								</div>
+							</div>
+
+						</li>
+						<li>
+							<a href="#" class="menu-item">about</a>
+							<div class="menu-content">
+								<div class="menu-sub">
+									Some Text
+								</div>
+							</div>
+
+						</li>
+					</ul>
+				</nav>
+
+			 <!-- Toolbar  -->
+			<div class="row">
+				<ul class="toolbar">
+					<li><a class='toolBtn interaction' id="selectBtn"></a></li>
+					<li><a class='toolBtn interaction' id="transformBtn"></a></li>
+					<li><a class='toolBtn interaction' id="rotateBtn"></a></li>
+					<li><a class='toolBtn interaction' id="scaleBtn"></a></li>
+				</ul>
+			</div>
+
+			<!-- Canvas -->
+			<div class="row">
+				<div id='canvas'>
+			
+				</div>
+			</div>
+	</div>
+	<script src="/session/libs/three.js"></script>
+	<script src="/js/libs/jquery-1.11.2.js"></script>
+	<script src="/session/libs/OrbitControls.js"></script>
+	<script src="/session/libs/OBJLoader.js"></script>
+	<script src="/session/libs/TransformControls.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/session/js/Editor.js"></script>
+	<script language="javascript" type="text/javascript" src="/session/js/Controller.js"></script>
+<!-- TODO  <script src="/session/js/IO.js"></script> -->
+	<script>
+	var io = io.connect();
+	var editor;
+	var controller;
+	// Set Session name and type from url
+	var pin_endPos = document.URL.indexOf('&');
+    var pin_startPos = document.URL.lastIndexOf('/')+1;
+
+    var data = {
+    	"urlType" : document.URL.slice((pin_endPos+1), document.URL.length),
+    	"sessionName" : document.URL.slice(pin_startPos, pin_endPos)
+    };
+	// Init IO-Call for the inital user
+	io.on('inventor', function(sessionID) {
+		
+		editor = new Editor();
+		controller = new Controller(editor, data);	
+		controller.inventor(sessionID);
+	});
+	// Init IO-Call for the guest user
+	io.on('sync', function(sessionObj) {
+		editor = new Editor();
+		controller = new Controller(editor, data);
+		controller.guest(sessionObj);
+	});
+	// IO-Call for synchronising interactions on the scene
+	io.on('sceneChange', function(data){
+		controller.handleScene(data);
+	});
+	//IO-Call to synchronise selection
+	io.on('selectionsChange', function(obj){
+		controller.handleSelections(obj);
+	});
+	// once everything is loaded, we call the server 
+	// to start client as inventor or guest
+	window.onload = io.emit('session:ready',{con_data: data});
+
+	</script>
+</body>
+</html>
