@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <title>groaf</title>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/skeleton.css">
+    <link rel="stylesheet" href="styles/style.css">
+
+    <script src="/js/libs/jquery-1.11.2.js"></script>
+    <script src="/js/script.js"></script>
+     
+</head>
+<body>
+    <!-- Background image -->
+    <img class="bg-image" src="images/bg2a.png" width="100%" height="auto" alt="mesh background image">
+
+    <!-- Landing page content -->
+    <div id="groaf_section">
+
+        <div class="container">
+            <div class="row">
+                <p class="title">groaf</p>
+            </div>
+            <div class="row"> 
+                <p class="tagline">A collaborative 3D editor project</p>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <input id="groaf_pin" type="text" name="sessionID" />
+                <p id="hint">Only alphabetic characters, numbers and underscore are allowed and should contain at leat one character!</p>
+            </div>
+
+            <div class="row">
+                <button class="btn_ora" id="create" type="submit">Create Session</button>
+                <button class="btn_ora" id="join" type="submit">Join Session</button>
+            </div>
+            <div class="row">
+                 <p>Just tell your friend your chosen session name so that he or she can join.</p>
+            </div>
+        </div>
+        <div class="row">
+            <hr>
+            
+            <h6>This project is realized with</h6>
+        </div>
+        <div class="row">
+            <div class="one-half column article">
+                <a href="http://express-io.org/">
+                <img src="images/expressIO_logo-bright.png" width="180" height="auto" alt="logo express.io"></a>
+                <p>and</p>
+                <a href="https://nodejs.org/">
+                <img src="images/node_logo.png" width="180" height="auto" alt="logo node.js"></a>
+
+                <p>
+                Express.io combines the beauty of the node.js framework express with the websocket-framework socket.io to make realtime-routing a sweet.
+                </p>
+
+            </div> <!-- one-half column end-->
+
+            <div class="one-half column article">
+                <a href="http://threejs.org/">
+                <img src="images/threeJS_logo.png" width="180" height="auto" alt="logo three.js"></a>
+                <p>
+                Three.js is a lightweight cross-browser JavaScript library/API used to create and display animated 3D computer graphics on a Web browser. Three.js uses WebGL. 
+                </p>
+
+            </div> <!-- one-half column end-->
+        </div>
+    </div> <!-- groaf_section end -->
+    <div id="gitfodder">
+        <p>Fork me on github</p>
+        <a href="https://github.com/hwernze/groaf">
+            <img src="/images//Octocat.png" width="80" height="auto">
+        </a>
+        
+    </div>     
+</body>
+</html>
