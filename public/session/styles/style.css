@@ -1,0 +1,145 @@
+body, html{
+	margin: 0;
+	font: 14px "Sansation", Helvetica, sans-serif;
+}
+
+th{
+	color: #ffae00;
+}
+td{
+	padding: 10px;
+	color: #898989;
+}
+.menubar{ 
+	width:100%;
+	background-color:#222;
+	height:70px;
+	color:#383838;
+    border-bottom: 1px solid #ffae00;
+}
+.menubar .logo{
+	color:white;
+	float:left;
+	height:40px;
+	padding:15px 30px;
+	font-size:1.4em;
+	line-height:40px;
+  }
+.menubar > ul{
+	margin:0;
+	padding:0;
+	float:left;
+	list-style-type:none;
+}
+.menubar > ul > li{
+	float:left;
+}
+.menu-item{
+	display:inline-block;
+	padding:15px 20px;
+	height:40px;
+	line-height:40px;
+	/*color:#898989;*/
+	color: white;
+	text-decoration:none;
+}
+.menu-item:hover {
+	background-color:#444;
+}
+.menu-item:focus{
+	color: #21c9af;
+}
+.menu-content{
+	position:absolute;
+	top:70px;
+	overflow:hidden; 
+	background-color:#444;
+	max-height:0;
+	/*opacity: 0;*/
+}
+.menu-content a{
+	color:#fff;
+	text-decoration:none;
+}
+.menu-content a:hover{
+	text-decoration:underline;
+}
+.menu-sub{
+	padding:20px;
+}
+.menu-sub ul{
+	padding:0;
+	margin:0;
+	list-style-type:none;
+}
+ul > label{
+	color:#ffae00;
+}
+.menu-sub ul li a{
+	display:inline-block;
+	padding:5px 0;
+}
+.menu-item:focus{
+	background-color:#444;
+	outline: none !important; /*Safari webkit-bug(focus) nessesary for the tabindex otherwise blue border */
+}
+.menu-item:focus ~ .menu-content{
+	/*display: block;*/
+	max-height:400px;
+	transition:max-height 400ms ease-in;
+	-webkit-transition:max-height 400ms ease-in;
+	-moz-transition:max-height 400ms ease-in;
+	z-index: 5;
+}
+
+.toolbar {
+	position: absolute;
+	display: block;
+	float: left;
+	width: 100%;
+	background: #383838;
+	padding: 5px;
+	margin: 0px;
+	list-style: none;
+	text-decoration: none;
+	z-index: 1;
+}
+
+.toolBtn{
+	float:left;
+	cursor:pointer;
+	width:40px;
+	height:40px;
+	background-size: 32px 32px;
+	margin-right: 8px;
+
+	background-color: #383838 ;
+	background-repeat:no-repeat;
+	background-size: contain;
+
+	border:1px solid #898989;
+	border-radius: 4px 4px 4px 4px / 4px 4px 4px 4px;
+	z-index: 10;
+}
+
+#selectBtn{
+	background-image: url(../images/icons/icon_select.png);
+	z-index: 10;
+}
+#rotateBtn{
+ 	background-image: url(../images/icons/icon_rotate.png);
+ 	z-index: 10;
+}
+#transformBtn{
+ 	background-image: url(../images/icons/icon_transform.png);
+ 	z-index: 10;
+}
+#scaleBtn{
+ 	background-image: url(../images/icons/icon_scale.png);
+ 	z-index: 10;
+}
+.displayNone{
+	display: none;
+	opacity:0;
+	z-index: 0;
+}
