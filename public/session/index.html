@@ -21,7 +21,7 @@
 							<div class="menu-content">
 								<div class="menu-sub">
 									<ul>
-										<li><a href="#" class='interaction'>Delete</a></li>
+										<li><a href="#" class='interaction' id="deleteBtn">Delete</a></li>
 										<li id="test">											
 											<a href="#" id='loadObjBtn' onClick=>Import Object</a>
 											<input class="displayNone" type="file" id="fileload" name="upload" size="50" maxlength="100000"accept="model/obj" />
@@ -38,6 +38,7 @@
 								<div class="menu-sub">
 									<ul>
 										<label>Primitves</label>
+										<hr>
 										<li><a href="#" class='interaction' id='addcubeBtn'>Box</a></li>
 										<li><a href="#" class='interaction' id="addcylinder">Cylinder</a></li>
 										<li><a href="#" class='interaction' id="addtorus">Torus</a></li>
@@ -47,10 +48,36 @@
 
 						</li>
 						<li>
-							<a href="#" class="menu-item">about</a>
+							<a href="#" class="menu-item">Keyboard</a>
 							<div class="menu-content">
 								<div class="menu-sub">
-									Some Text
+									<table>
+										<tr>
+											<th>Function</th>
+											<th>Key</th>
+										</tr>
+
+										<tr>
+											<td>Select</td>
+											<td>Q</td>
+										</tr>
+										<tr>
+											<td>Translate</td>
+											<td>W</td>
+										</tr>
+										<tr>
+											<td>Rotate</td>
+											<td>E</td>
+										</tr>
+										<tr>
+											<td>Scale</td>
+											<td>R</td>
+										</tr>
+										<tr>
+											<td>Delete</td>
+											<td>Backspace</td>
+										</tr>
+									</table>
 								</div>
 							</div>
 
@@ -75,52 +102,15 @@
 				</div>
 			</div>
 	</div>
-	<script src="/session/libs/three.js"></script>
-	<script src="/js/libs/jquery-1.11.2.js"></script>
+	<script src="/session/libs/three.min.js"></script>
+	<script src="/libs/jquery.min.js"></script>
 	<script src="/session/libs/OrbitControls.js"></script>
 	<script src="/session/libs/OBJLoader.js"></script>
 	<script src="/session/libs/TransformControls.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/session/js/Editor.js"></script>
-	<script language="javascript" type="text/javascript" src="/session/js/Controller.js"></script>
-<!-- TODO  <script src="/session/js/IO.js"></script> -->
-	<script>
-	var io = io.connect();
-	var editor;
-	var controller;
-	// Set Session name and type from url
-	var pin_endPos = document.URL.indexOf('&');
-    var pin_startPos = document.URL.lastIndexOf('/')+1;
-
-    var data = {
-    	"urlType" : document.URL.slice((pin_endPos+1), document.URL.length),
-    	"sessionName" : document.URL.slice(pin_startPos, pin_endPos)
-    };
-	// Init IO-Call for the inital user
-	io.on('inventor', function(sessionID) {
-		
-		editor = new Editor();
-		controller = new Controller(editor, data);	
-		controller.inventor(sessionID);
-	});
-	// Init IO-Call for the guest user
-	io.on('sync', function(sessionObj) {
-		editor = new Editor();
-		controller = new Controller(editor, data);
-		controller.guest(sessionObj);
-	});
-	// IO-Call for synchronising interactions on the scene
-	io.on('sceneChange', function(data){
-		controller.handleScene(data);
-	});
-	//IO-Call to synchronise selection
-	io.on('selectionsChange', function(obj){
-		controller.handleSelections(obj);
-	});
-	// once everything is loaded, we call the server 
-	// to start client as inventor or guest
-	window.onload = io.emit('session:ready',{con_data: data});
-
-	</script>
+	<script src="/session/js/Controller.js"></script>
+	<script src="/session/js/io.js"></script>
+	
 </body>
 </html>
