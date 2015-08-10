@@ -173,11 +173,6 @@ Editor.prototype ={
 	*/ 
 	intersect: function( x, y ){
 		//calculate mouse position in normalized device coordinates
-		console.log("intersect");
-		console.log("X");
-		console.log(x);
-		console.log("Y");
-		console.log(y);
 		var x = x;
 		var y = y;
 		this.mouse.x = ( x / window.innerWidth ) * 2 - 1; 
@@ -233,7 +228,7 @@ Editor.prototype ={
 				};
 			};
 		}else{//no hit
-			console.log("Click on empty space");
+			//console.log("Click on empty space");
 			return null;
 			
 		}
