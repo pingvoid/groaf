@@ -87,10 +87,22 @@ Controller.prototype = {
 	},
 	/*
 	*Handling mouse events on GUI
-	*TODO: Reorgsanize in a more generic way(using data-attr)
+	*TODO: Reorgsanize in a more generic way(e.g. using data-attr)
 	*@param evt <click-event>
 	*/
-	onMouseClick: function( evt ) { 
+	onMouseClick: function( evt ) {
+
+		if (evt.target.id=='deleteBtn') {
+			io.emit('session:changeScene', {
+					option:"remove", 
+					uuid: this.editor.selected.uuid, 
+					con_data:this.data
+				});
+			this.editor.removeObj( this.editor.selected );
+			this.editor.removeHelper(this.editor.helpers[this.editor.selected.id]);
+			this.editor.deselect();
+			return ;
+		};
 		if (evt.target.id=='addcubeBtn') {
 			this.editor.createPrimitive('cube');
 			return ;
@@ -109,14 +121,17 @@ Controller.prototype = {
 		};
 		if (evt.target.id == 'rotateBtn') {
 			this.editor.modifieSelection("rotate");
+			console.log($(this));
 			return;
 		};
 		if (evt.target.id == 'scaleBtn') {
 			this.editor.modifieSelection("scale");
+			console.log($(this));
 			return;
 		};
 		if (evt.target.id == 'selectBtn') {
-			this.editor.modifieSelection( "select" )
+			this.editor.modifieSelection( "select" );
+			console.log($(this));
 			return ;
 		};
 	},
