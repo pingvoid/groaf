@@ -8,10 +8,11 @@ $(document).ready(function() {
 	//or null if its invalid!
 	var allowedSigns =/^[\w_]*$/;
 	//Allow submit
-	var valid = false;
+	var valid = true;
 
 	//Create submit
 	$("#create").click(function(){
+		
 		if (valid) {
 			var pin = $("#groaf_pin").val();
 			window.location.pathname = "/session/"+pin+ '&create';
@@ -19,6 +20,7 @@ $(document).ready(function() {
 	});
 	//Join submit
 	$("#join").click(function(){
+		
 		if (valid) {
 			var pin = $("#groaf_pin").val();
 			window.location.pathname = "/session/"+pin+ '&join';
